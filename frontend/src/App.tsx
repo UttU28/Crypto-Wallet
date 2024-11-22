@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { readFileSync } from 'fs';
 import { Fireblocks, BasePath } from '@fireblocks/ts-sdk';
 
-// Fireblocks API setup
 const FIREBLOCKS_API_SECRET_PATH = './fireblocks_secret.key';
 
 const fireblocks = new Fireblocks({
