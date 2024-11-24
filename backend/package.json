@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@fireblocks/ts-sdk": "^5.0.0",
-    "cors": "^2.8.5",
-    "express": "^4.21.1",
-    "node-fetch": "^2.7.0"
-  }
-}
