@@ -1,5 +1,3 @@
-// api/getAllVaultAccounts/route.js
-
 import { readFileSync } from "fs";
 import { Fireblocks, BasePath } from "@fireblocks/ts-sdk";
 
@@ -9,12 +7,24 @@ const fireblocks = new Fireblocks({
   basePath: BasePath.Sandbox,
 });
 
-export async function GET() {
+export async function GET(req) {
   try {
-    const limit = 10; // Set the limit or fetch from query params if needed
-    const vaults = await fireblocks.vaults.getPagedVaultAccounts({ limit });
+    const url = new URL(req.url);
 
-    return new Response(JSON.stringify(vaults), {
+    const email = url.searchParams.get("email");
+    if (!email) {
+      return new Response(
+        JSON.stringify({ error: "Email not provided" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const limit = 10;
+
+    const emailLocalPart = email.split('@')[0];
+    const vaults = await fireblocks.vaults.getPagedVaultAccounts({ limit });
+    const filteredVaults = vaults.data.accounts.filter(vault => vault.customerRefId && vault.customerRefId.startsWith(emailLocalPart));
+    console.log(filteredVaults)
+    return new Response(JSON.stringify(filteredVaults), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

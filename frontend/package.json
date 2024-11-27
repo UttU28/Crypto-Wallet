@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.13.5",
     "@fireblocks/ts-sdk": "^5.0.0",
     "@mui/material": "^6.1.8",
+    "firebase": "^11.0.2",
     "frontend": "file:",
     "lucide-react": "^0.460.0",
     "next": "15.0.3",
